@@ -1,0 +1,26 @@
+.sidebar{
+    background: white;
+    height: 100%;
+    border-radius: 16px;
+    padding: 1em;
+    box-shadow: 1px 11px 8px #000;
+}
+
+.nav-item{
+    width: 100%;
+    border-radius: 16px;
+    overflow: hidden;
+}
+
+.nav-link{
+    width: 100%;
+    text-align: center;
+    text-decoration: none;
+    background-color: #01aca9;
+    color: white;
+}
+
+.nav-link.active{
+    background-color: #17396C;
+    color: white;
+}

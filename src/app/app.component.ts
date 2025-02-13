@@ -2,10 +2,11 @@ import { Component, inject, TemplateRef } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { ModalDismissReasons, NgbModal, NgbTooltipModule } from '@ng-bootstrap/ng-bootstrap';
 import { ClientService } from './services/client.service';
+import { SidebarComponent } from './components/sidebar/sidebar.component';
 
 @Component({
 	selector: 'app-root',
-	imports: [RouterOutlet, NgbTooltipModule],
+	imports: [RouterOutlet, NgbTooltipModule, SidebarComponent],
 	templateUrl: './app.component.html',
 	styleUrl: './app.component.css'
 })

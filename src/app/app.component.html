@@ -1,4 +1,4 @@
-<button class="btn btn-primary" (click)="open(content)">¡Botón Bootstrap!</button>
+<!-- <button class="btn btn-primary" (click)="open(content)">¡Botón Bootstrap!</button>
 <button class="btn btn-primary" ngbTooltip="¡Hola Mundo!">
   Hover sobre mí
 </button>
@@ -20,5 +20,14 @@
 	</div>
 </ng-template>
 
+<img src="https://atlanticqi.com/wp-content/uploads/2023/07/Atlantic-Quantum-Innovations.png" alt="" class="img-fluid"> -->
+<div class="container-general">
+	<div class="content-sidebar">
+		<app-sidebar />
+	</div>
+	
+	<div class="content-all-pages">
+		<router-outlet />
+	</div>
+</div>
 
-<router-outlet />

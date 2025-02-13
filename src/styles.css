@@ -1,1 +1,22 @@
 /* You can add global styles to this file, and also import other style files */
+*{
+    font-family: "Outfit", serif;
+}
+.title-page{
+    font-size: clamp(30px, 4.5vw, 45px);
+    font-weight: 800;
+    line-height: 1em;
+}
+
+.description-page{
+    line-height: 0;
+}
+
+.btn-style-1{
+    border: none;
+    background: #000;
+    color: white;
+    border-radius: 16px;
+    box-shadow: 1px 4px 8px #0000006e;
+    padding: 5px 1em;
+}
