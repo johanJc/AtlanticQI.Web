@@ -42,10 +42,10 @@
                     <td class="no-wrap text-center">{{item.city}}</td>
                     <td class="no-wrap text-center">
                         <div class="w-100 d-flex justify-content-center gap-3">
-                            <button class="no-btn text-primary">
+                            <button class="no-btn text-primary" (click)="editClient(item);open(modalAddClient)">
                                 <i class="fa-solid fa-pen-to-square"></i>
                             </button>
-                            <button class="no-btn text-danger">
+                            <button class="no-btn text-danger" (click)="dropClient(item.idClient)">
                                 <i class="fa-solid fa-trash"></i>
                             </button>
                         </div>
@@ -65,7 +65,7 @@
                 <i class="fa-solid fa-circle-xmark"></i>
             </button>
         </div>
-        <p class="title-modal">Agregar cliente</p>
-        <app-form (formComplete)="modal.dismiss('Cross click'); updateTable($event)" />
+        <p class="title-modal">{{titleModal}}</p>
+        <app-form [clientToEdit]="clientEdit" (formComplete)="modal.dismiss('Cross click'); updateTable($event)" />
     </div>
 </ng-template>

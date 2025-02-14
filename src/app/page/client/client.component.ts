@@ -15,6 +15,8 @@ export class ClientComponent {
   modalService = inject(NgbModal);
   clientService = inject(ClientService);
   closeResult;
+  clientEdit: Client;
+  titleModal = 'Agregar cliente';
 
   ngOnInit() {
     this.getClients();
@@ -34,9 +36,43 @@ export class ClientComponent {
     })
   }
 
-  updateTable(event:Client){
-    this.clients.push(event);
+  /**
+   * Almacena el cliente a editar en la variable clientEdit para que al abrir al modal este cargue la data en el formulario
+   * establece el nombre del modal como Editar cliente
+   * @param client Cliente a editar
+   */
+  editClient(client: Client) {
+    this.titleModal = 'Editar cliente';
+    this.clientEdit = client;
   }
+
+  updateTable(event: Client) {
+    const index = this.clients.findIndex(client => client.idClient === event.idClient);
+    if (index !== -1) {
+      // Si el cliente existe, actualiza la información
+      this.clients[index] = event;
+    } else {
+      // Si no existe, agrega el nuevo registro
+      this.clients.push(event);
+    }
+  }
+
+  dropClient(id) {
+    // !Mostrar alerta de  pregunta
+
+    this.clientService.deleteClient(id).subscribe({
+      next: () => {
+        const index = this.clients.findIndex(client => client.idClient === id);
+        if (index !== -1) {
+          this.clients.splice(index, 1)
+        }
+      },
+      error: () => {
+
+      }
+    })
+  }
+
 
   /**
    * Abre un modal
@@ -59,6 +95,8 @@ export class ClientComponent {
    * @returns 
    */
   private getDismissReason(reason: any): string {
+    this.clientEdit = undefined;
+    this.titleModal = 'Agregar cliente';
     switch (reason) {
       case ModalDismissReasons.ESC:
         return 'by pressing ESC';

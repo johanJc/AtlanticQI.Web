@@ -1,4 +1,4 @@
-import { Component, EventEmitter, inject, Output } from '@angular/core';
+import { Component, EventEmitter, inject, Input, Output } from '@angular/core';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Client } from '../../../interfaces/client';
 import { ClientService } from '../../../services/client.service';
@@ -11,6 +11,7 @@ import { AlertcService } from '../../../services/alertc.service';
   styleUrl: './form.component.css'
 })
 export class FormComponent {
+  @Input() clientToEdit:Client;
   @Output() formComplete = new EventEmitter<any>();
   clientService = inject(ClientService);
   formBuilder = inject(FormBuilder);
@@ -31,6 +32,21 @@ export class FormComponent {
     })
   }
 
+  ngOnInit(){
+    if(this.clientToEdit){      
+      console.log("ID de cliente: ", this.clientToEdit.idClient)
+      this.formClient.get('firstName').setValue(this.clientToEdit.firstName)
+      this.formClient.get('lastName').setValue(this.clientToEdit.lastName)
+      this.formClient.get('email').setValue(this.clientToEdit.email)
+      this.formClient.get('phone').setValue(this.clientToEdit.phone)
+      this.formClient.get('birthDate').setValue(this.clientToEdit.birthDate)
+      this.formClient.get('documentType').setValue(this.clientToEdit.documentType)
+      this.formClient.get('documentNumber').setValue(this.clientToEdit.documentNumber)
+      this.formClient.get('address').setValue(this.clientToEdit.address)
+      this.formClient.get('city').setValue(this.clientToEdit.city)
+    }
+  }
+
   /**
    * Agregar un cliente a la BD
    */
@@ -40,7 +56,7 @@ export class FormComponent {
       return;
     }
 
-    let data:Client = {
+    let data:Client = {      
       firstName: this.formClient.get('firstName').value,
       lastName: this.formClient.get('lastName').value,
       email: this.formClient.get('email').value,
@@ -52,7 +68,7 @@ export class FormComponent {
       city: this.formClient.get('city').value
     }
 
-    this.clientService.createClient(data).subscribe({
+    this.clientService.createClient(data, this.clientToEdit?.idClient || null).subscribe({
       next: (result:any) => {        
         this.alert.showAlert('success', 'Cliente creado correctamente');
         this.formComplete.emit(result);
