@@ -1,0 +1,105 @@
+<form [formGroup]="formClient">
+    <div class="row">
+        <div class="col-lg-6 col-sm-12">
+            <div class="form-group mt-3">
+                <label for="inp-name">Nombre*</label>
+                <input type="text" name="name" id="inp-name" class="form-control" formControlName="firstName">
+                <!-- Mensaje de error -->
+                @if (formClient.get('firstName')?.invalid && formClient.get('firstName')?.touched) {
+                <div class="text-danger msg-error-input">
+                    Este campo es obligatorio.
+                </div>
+                }
+            </div>
+        </div>
+        <div class="col-lg-6 col-sm-12">
+            <div class="form-group mt-3">
+                <label for="inp-lastname">Apellido*</label>
+                <input type="text" name="lastname" id="inp-lastname" class="form-control" formControlName="lastName">
+                <!-- Mensaje de error -->
+                @if (formClient.get('lastName')?.invalid && formClient.get('lastName')?.touched) {
+                <div class="text-danger msg-error-input">
+                    Este campo es obligatorio.
+                </div>
+                }
+            </div>
+        </div>
+    </div>
+    <div class="form-group mt-3">
+        <label for="inp-email">Correo*</label>
+        <input type="text" name="email" id="inp-email" class="form-control" formControlName="email">
+        @if (formClient.get('email')?.touched) {
+        <div class="text-danger msg-error-input">
+            @if (formClient.get('email')?.hasError('required')) {
+            Este campo es obligatorio.
+            }
+            @if (formClient.get('email')?.hasError('pattern')) {
+            Email invalido
+            }
+        </div>
+        }
+    </div>
+    <div class="row">
+        <div class="col-lg-6 col-sm-12">
+            <div class="form-group mt-3">
+                <label for="inp-phone">Celular</label>
+                <input type="text" name="phone" id="inp-phone" class="form-control" formControlName="phone">
+                @if (formClient.get('phone')?.touched) {
+                @if (formClient.get('phone')?.hasError('maxlength')) {
+                    <div class="text-danger msg-error-input">
+                        Máximo 10 caracteres
+                    </div>
+                }
+                }
+            </div>
+        </div>
+        <div class="col-lg-6 col-sm-12">
+            <div class="form-group mt-3">
+                <label for="inp-birthdate">Fecha de nacimiento</label>
+                <input type="date" name="birthdate" id="inp-birthdate" class="form-control" formControlName="birthDate">
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-6 col-sm-12">
+            <div class="form-group mt-3">
+                <label for="slc-type-id">Tipo de documento*</label>
+                <select name="type-id" id="slc-type-id" class="form-select" formControlName="documentType">
+                    <option value="Cédula">Cédula</option>
+                    <option value="Pasaporte">Pasaporte</option>
+                </select>
+                @if (formClient.get('documentType')?.invalid && formClient.get('documentType')?.touched) {
+                <div class="text-danger msg-error-input">
+                    Este campo es obligatorio.
+                </div>
+                }
+            </div>
+        </div>
+        <div class="col-lg-6 col-sm-12">
+            <div class="form-group mt-3">
+                <label for="inp-identity">Documento*</label>
+                <input type="number" name="identity" id="inp-identity" class="form-control"
+                    formControlName="documentNumber">
+                @if (formClient.get('documentNumber')?.invalid && formClient.get('documentNumber')?.touched) {
+                <div class="text-danger msg-error-input">
+                    Este campo es obligatorio.
+                </div>
+                }
+            </div>
+        </div>
+    </div>
+    <div class="form-group mt-3">
+        <label for="inp-address">Dirección</label>
+        <input type="address" name="address" id="inp-address" class="form-control" formControlName="address">
+    </div>
+    <div class="form-group mt-3">
+        <label for="inp-city">Ciudad</label>
+        <input type="text" name="city" id="inp-city" class="form-control" formControlName="city">
+    </div>
+
+    <div class="cont-button mt-3 w-100 d-flex gap-3 justify-content-center">
+        <button class="btn-style-1" (click)="saveClient()">
+            Guardar
+        </button>
+    </div>
+</form>

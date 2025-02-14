@@ -1,22 +1,84 @@
 /* You can add global styles to this file, and also import other style files */
-*{
+* {
     font-family: "Outfit", serif;
 }
-.title-page{
+
+.title-page {
     font-size: clamp(30px, 4.5vw, 45px);
     font-weight: 800;
     line-height: 1em;
 }
 
-.description-page{
+.description-page {
     line-height: 0;
 }
 
-.btn-style-1{
+.btn-style-1 {
     border: none;
     background: #000;
     color: white;
     border-radius: 16px;
     box-shadow: 1px 4px 8px #0000006e;
     padding: 5px 1em;
+    transition: all ease-in-out .2s;
+}
+
+.btn-style-1:hover {
+    background: #17396C;
+}
+
+.btn-style-1:active {
+    background: #000;
+    transform: translateY(5px);
+}
+
+.rounded-table {
+    border-collapse: separate;
+    border-spacing: 0;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.rounded-table thead th:first-child {
+    border-top-left-radius: 10px;
+}
+
+.rounded-table thead th:last-child {
+    border-top-right-radius: 10px;
+}
+
+table{
+    box-shadow: 1px 4px 8px #0000006e;
+}
+
+.no-wrap {
+    white-space: nowrap !important;
+}
+
+.no-btn{
+    background-color: transparent;
+    border: none;
+    outline: none;
+}
+
+.btn-close-modal{
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    color: red;
+    font-size: 1.2rem;
+}
+
+.title-modal{
+    font-weight: 900;
+    font-size: 1.5em;
+    text-align: center;
+}
+.form-group{
+    position: relative;
+}
+.msg-error-input{
+    position: absolute;
+    font-weight: 600;
+    font-size: 0.7rem;
 }

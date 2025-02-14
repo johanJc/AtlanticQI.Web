@@ -1,8 +1,8 @@
 .container-general{
     display: grid;
     height: 100dvh;
-    grid-template-columns: 200px auto;
-    gap: 1em;
+    grid-template-columns: 200px calc(100vw - 200px);
+    /* gap: 1em; */
     background: linear-gradient(146deg, #17396C 0%, #0E195A 46%);;
 }
 

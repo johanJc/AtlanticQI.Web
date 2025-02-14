@@ -9,10 +9,63 @@
 
 <div class="body-page mt-4">
     <div class="buttons w-100 justify-content-end gap-3 d-flex">
-        <button class="btn-style-1">
+        <button class="btn-style-1" (click)="open(modalAddClient)">
             <i class="fa-solid fa-plus"></i>&nbsp;Crear cliente
         </button>
     </div>
 
-    
+    <div class="table-responsive mt-3 rounded-table">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th class="no-wrap text-center" scope="col">Nombre</th>
+                    <th class="no-wrap text-center" scope="col">Apellido</th>
+                    <th class="no-wrap text-center" scope="col">Email</th>
+                    <th class="no-wrap text-center" scope="col">Teléfono</th>
+                    <th class="no-wrap text-center" scope="col">Tipo ID</th>
+                    <th class="no-wrap text-center" scope="col">Identificación</th>
+                    <th class="no-wrap text-center" scope="col">Dirección</th>
+                    <th class="no-wrap text-center" scope="col">Ciudad</th>
+                    <th class="no-wrap text-center" scope="col">Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                @for (item of clients; track $index) {
+                <tr>
+                    <td class="no-wrap text-center">{{item.firstName}}</td>
+                    <td class="no-wrap text-center">{{item.lastName}}</td>
+                    <td class="no-wrap text-center">{{item.email}}</td>
+                    <td class="no-wrap text-center">{{item.phone}}</td>
+                    <td class="no-wrap text-center">{{item.documentType}}</td>
+                    <td class="no-wrap text-center">{{item.documentNumber}}</td>
+                    <td class="no-wrap text-center">{{item.address}}</td>
+                    <td class="no-wrap text-center">{{item.city}}</td>
+                    <td class="no-wrap text-center">
+                        <div class="w-100 d-flex justify-content-center gap-3">
+                            <button class="no-btn text-primary">
+                                <i class="fa-solid fa-pen-to-square"></i>
+                            </button>
+                            <button class="no-btn text-danger">
+                                <i class="fa-solid fa-trash"></i>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+                }
+            </tbody>
+        </table>
+    </div>
 </div>
+
+<ng-template #modalAddClient let-modal>
+    <div class="modal-body">
+        <div class="close-modal">
+            <button class="no-btn btn-close-modal" type="button" aria-label="Close"
+                (click)="modal.dismiss('Cross click')">
+                <i class="fa-solid fa-circle-xmark"></i>
+            </button>
+        </div>
+        <p class="title-modal">Agregar cliente</p>
+        <app-form (formComplete)="modal.dismiss('Cross click'); updateTable($event)" />
+    </div>
+</ng-template>

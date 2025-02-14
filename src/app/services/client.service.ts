@@ -19,4 +19,14 @@ export class ClientService {
       header.set('Type-content', 'aplication/json')
       return this.http.get(this.api+'Client', {headers: header})
   }
+
+    /**
+   * Crea un nuevo cliente
+   * @param client Datos del cliente a guardar
+   * @returns Observable con la respuesta del servidor
+   */
+    createClient(client: any){
+      const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
+      return this.http.post(this.api+'Client', client, { headers });
+    }
 }
