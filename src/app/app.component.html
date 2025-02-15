@@ -1,26 +1,6 @@
-<!-- <button class="btn btn-primary" (click)="open(content)">¡Botón Bootstrap!</button>
-<button class="btn btn-primary" ngbTooltip="¡Hola Mundo!">
-  Hover sobre mí
-</button>
-
-<ng-template #content let-modal>
-	<div class="modal-header">
-		<h4 class="modal-title" id="modal-basic-title">Profile update</h4>
-		<button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')"></button>
-	</div>
-	<div class="modal-body">
-		<form>
-			<div class="mb-3">
-				<label for="dateOfBirth">Date of birth</label>
-			</div>
-		</form>
-	</div>
-	<div class="modal-footer">
-		<button type="button" class="btn btn-outline-secondary" (click)="modal.close('Save click')">Save</button>
-	</div>
-</ng-template>
-
-<img src="https://atlanticqi.com/wp-content/uploads/2023/07/Atlantic-Quantum-Innovations.png" alt="" class="img-fluid"> -->
+@if (loading) {
+	<app-loading/>
+}
 <div class="container-general">
 	<div class="content-sidebar">
 		<app-sidebar />

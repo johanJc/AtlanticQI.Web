@@ -3,6 +3,7 @@ import { Client } from '../../interfaces/client';
 import { ClientService } from '../../services/client.service';
 import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { FormComponent } from './form/form.component';
+import { AlertcService } from '../../services/alertc.service';
 
 @Component({
   selector: 'app-client',
@@ -14,6 +15,7 @@ export class ClientComponent {
   clients = <Client[]>[]
   modalService = inject(NgbModal);
   clientService = inject(ClientService);
+  alert = inject(AlertcService);
   closeResult;
   clientEdit: Client;
   titleModal = 'Agregar cliente';
@@ -31,7 +33,7 @@ export class ClientComponent {
         this.clients = <Client[]>data;
       },
       error: (error) => {
-
+        this.alert.showAlert('error', 'Error al obtener listado de clientes')
       }
     })
   }
@@ -57,18 +59,25 @@ export class ClientComponent {
     }
   }
 
-  dropClient(id) {
-    // !Mostrar alerta de  pregunta
+  /**
+   * Elimina un cliente de la BD, primero muestra mensaje de confirmación
+   * @param id id del cliente a elimnar 
+   * @returns 
+   */
+  async dropClient(id) {    
+    let response = await this.alert.showQuestion('¿Está seguro de eliminar este cliente?');
+    if(!response.isConfirmed) return
 
     this.clientService.deleteClient(id).subscribe({
       next: () => {
+        this.alert.showAlert('success', 'Cliente eliminado')
         const index = this.clients.findIndex(client => client.idClient === id);
         if (index !== -1) {
           this.clients.splice(index, 1)
         }
       },
       error: () => {
-
+        this.alert.showAlert('error', 'common error')
       }
     })
   }
@@ -81,10 +90,12 @@ export class ClientComponent {
   open(content: TemplateRef<any>) {
     this.modalService.open(content, { ariaLabelledBy: 'modal-basic-title' }).result.then(
       (result) => {
-        this.closeResult.set(`Closed with: ${result}`);
+        this.clientEdit = undefined;
+        this.closeResult?.set(`Closed with: ${result}`);
       },
       (reason) => {
-        this.closeResult.set(`Dismissed ${this.getDismissReason(reason)}`);
+        this.clientEdit = undefined;
+        this.closeResult?.set(`Dismissed ${this.getDismissReason(reason)}`);
       },
     );
   }

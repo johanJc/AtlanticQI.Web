@@ -1,34 +1,30 @@
-import { Component, inject, TemplateRef } from '@angular/core';
+import { ChangeDetectorRef, Component, inject } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { ModalDismissReasons, NgbModal, NgbTooltipModule } from '@ng-bootstrap/ng-bootstrap';
-import { ClientService } from './services/client.service';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
+import { LoadingComponent } from './components/loading/loading.component';
+import { GeneralService } from './services/general.service';
+import { Subject, takeUntil } from 'rxjs';
 
 @Component({
 	selector: 'app-root',
-	imports: [RouterOutlet, NgbTooltipModule, SidebarComponent],
+	imports: [RouterOutlet, SidebarComponent, LoadingComponent],
 	templateUrl: './app.component.html',
 	styleUrl: './app.component.css'
 })
 export class AppComponent {
-	title = 'AtlanticQI.Web';
-	modalService = inject(NgbModal);
-	clientService = inject(ClientService);
-	closeResult;
+	private unsubscribe$ = new Subject<void>();
+	sharedDataService = inject(GeneralService);
+	loading = false;
+	cdr = inject(ChangeDetectorRef);
 
 	ngOnInit(){
-		this.getClients();
+		this.sharedDataService.loadingObser
+		.pipe(takeUntil(this.unsubscribe$))
+		.subscribe({
+		  next: (data: any) => {
+			this.loading = data;
+			this.cdr.detectChanges();
+		  }
+		});
 	}
-
-	getClients() {
-		this.clientService.getClients().subscribe({
-			next: (data) => {
-				console.log("DATA :", data)
-			},
-			error:(error) => {
-
-			}
-		})
-	}
-
 }

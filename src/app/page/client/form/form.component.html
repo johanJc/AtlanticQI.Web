@@ -34,7 +34,7 @@
             Este campo es obligatorio.
             }
             @if (formClient.get('email')?.hasError('pattern')) {
-            Email invalido
+            Email inválido
             }
         </div>
         }
@@ -46,9 +46,9 @@
                 <input type="text" name="phone" id="inp-phone" class="form-control" formControlName="phone">
                 @if (formClient.get('phone')?.touched) {
                 @if (formClient.get('phone')?.hasError('maxlength')) {
-                    <div class="text-danger msg-error-input">
-                        Máximo 10 caracteres
-                    </div>
+                <div class="text-danger msg-error-input">
+                    Máximo 10 caracteres
+                </div>
                 }
                 }
             </div>
@@ -65,6 +65,7 @@
             <div class="form-group mt-3">
                 <label for="slc-type-id">Tipo de documento*</label>
                 <select name="type-id" id="slc-type-id" class="form-select" formControlName="documentType">
+                    <option hidden value="">Selécciona</option>
                     <option value="Cédula">Cédula</option>
                     <option value="Pasaporte">Pasaporte</option>
                 </select>

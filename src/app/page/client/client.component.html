@@ -32,14 +32,14 @@
             <tbody>
                 @for (item of clients; track $index) {
                 <tr>
-                    <td class="no-wrap text-center">{{item.firstName}}</td>
+                    <td class="no-wrap text-center">{{item.firstName || 'N/A'}}</td>
                     <td class="no-wrap text-center">{{item.lastName}}</td>
-                    <td class="no-wrap text-center">{{item.email}}</td>
-                    <td class="no-wrap text-center">{{item.phone}}</td>
-                    <td class="no-wrap text-center">{{item.documentType}}</td>
+                    <td class="no-wrap text-center">{{item.email || 'N/A'}}</td>
+                    <td class="no-wrap text-center">{{item.phone || 'N/A'}}</td>
+                    <td class="no-wrap text-center">{{item.documentType || 'N/A'}}</td>
                     <td class="no-wrap text-center">{{item.documentNumber}}</td>
-                    <td class="no-wrap text-center">{{item.address}}</td>
-                    <td class="no-wrap text-center">{{item.city}}</td>
+                    <td class="no-wrap text-center">{{item.address || 'N/A'}}</td>
+                    <td class="no-wrap text-center">{{item.city || 'N/A'}}</td>
                     <td class="no-wrap text-center">
                         <div class="w-100 d-flex justify-content-center gap-3">
                             <button class="no-btn text-primary" (click)="editClient(item);open(modalAddClient)">
